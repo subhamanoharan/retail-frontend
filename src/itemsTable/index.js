@@ -15,22 +15,25 @@ export default class ItemsTable extends Component {
         <Table className="itemsTable">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat (g)</TableCell>
-              <TableCell align="right">Carbs (g)</TableCell>
-              <TableCell align="right">Protein (g)</TableCell>
+              <TableCell colSpan={5} align="center">BILL</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Item</TableCell>
+              <TableCell align="right">MRP</TableCell>
+              <TableCell align="right">SP</TableCell>
+              <TableCell align="right">Quantity</TableCell>
+              <TableCell align="right">Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
               this.props.items.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell component="th" scope="row">1</TableCell>
-                  <TableCell align="right">1</TableCell>
-                  <TableCell align="right">1</TableCell>
-                  <TableCell align="right">1</TableCell>
-                  <TableCell align="right">1</TableCell>
+                  <TableCell component="th" scope="row">{item.name}</TableCell>
+                  <TableCell align="right">{item.mrp}</TableCell>
+                  <TableCell align="right">{item.sp}</TableCell>
+                  <TableCell align="right">{item.quantity}</TableCell>
+                  <TableCell align="right">{item.price}</TableCell>
                 </TableRow>
               ))
             }

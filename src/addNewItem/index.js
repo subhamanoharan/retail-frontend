@@ -1,63 +1,72 @@
 import React, { Component} from "react";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
+import AddNewItemForm from './addNewItemForm';
+import "./styles.css";
 
 export default class AddNewItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: ' ', mrp: 0, sp: 0, quantity: 0 };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onAdd = this.onAdd.bind(this);
+    this.state = { open: false, item: { name: ' ', mrp: 0, sp: 0, quantity: 0 } };
   }
 
-  handleChange(name) {
-    return event => {
-      this.setState({
-        [name]: event.target.value,
-      });
-    };
+  handleClickOpen() {
+    this.setState({open: true });
   }
 
-  onAdd(event) {
-    this.props.onAdd({...this.state});
+  handleClose() {
+    this.setState({open: false, item: { name: ' ', mrp: 0, sp: 0, quantity: 0 } });
+  }
+
+  onChange(item) {
+    this.setState({item: {...this.state.item, ...item}});
+  }
+
+  onAdd(event){
+    this.props.onAdd(this.state.item);
+    this.handleClose();
     event.preventDefault();
   }
 
   render() {
     return(
-      <form noValidate autoComplete="off" onSubmit={this.onAdd}>
-        <TextField
-          id="name"
-          label="Name"
-          value={this.state.name}
-          onChange={this.handleChange('name')}
-        />
-        <TextField
-          id="mrp"
-          label="MRP"
-          value={this.state.mrp}
-          onChange={this.handleChange('mrp')}
-        />
-        <TextField
-          id="sp"
-          label="SP"
-          value={this.state.sp}
-          onChange={this.handleChange('sp')}
-        />
-        <TextField
-          id="quantity"
-          label="Quantity"
-          value={this.state.quantity}
-          onChange={this.handleChange('quantity')}
-        />
+      <div>
         <Button
-           type="submit"
-           variant="contained"
-           color="primary"
+          variant="contained"
+          color="primary"
+          onClick={this.handleClickOpen}
+          className="addNewItemBtn"
         >
-          Add
-        </Button>
-      </form>
+         Add item
+       </Button>
+       <Dialog
+         onClose={this.handleClose}
+         aria-labelledby="customized-dialog-title"
+         open={this.state.open}
+       >
+         <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+            Add Item
+         </DialogTitle>
+         <form onSubmit={this.onAdd}>
+           <DialogContent>
+              <AddNewItemForm item={this.state.item} onChange={this.onChange} />
+           </DialogContent>
+           <DialogActions>
+             <Button type="submit" color="primary">
+               Ok
+             </Button>
+           </DialogActions>
+         </form>
+       </Dialog>
+      </div>
     );
   }
 }
