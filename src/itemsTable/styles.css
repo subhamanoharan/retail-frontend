@@ -1,0 +1,8 @@
+.itemsTable {
+  min-width: 700;
+}
+
+.itemsTablePaper {
+  width: 100%;
+  overflow-x: auto;
+}
