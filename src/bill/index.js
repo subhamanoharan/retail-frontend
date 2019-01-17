@@ -8,8 +8,8 @@ export default class Bill extends Component {
   constructor(props) {
     super(props);
     this.state = { items: [
-      {name: 'dummy1', mrp: 30, sp: 20, quantity: 1, price: 20},
-      {name: 'dummy2', mrp: 30, sp: 20, quantity: 1, price: 20}
+      {name: 'dummy1', mrp: 30, sp: 20, quantity: 1},
+      {name: 'dummy2', mrp: 30, sp: 20, quantity: 1}
     ] };
     this.onAddNewItem = this.onAddNewItem.bind(this);
     this.onBarCodeScanned = this.onBarCodeScanned.bind(this);
@@ -20,7 +20,7 @@ export default class Bill extends Component {
   }
 
   onBarCodeScanned(code){
-    this.onAddNewItem({name: code, mrp: 31, sp: 21, quantity: 12, price: 1222});
+    this.onAddNewItem({name: code, mrp: 31, sp: 21, quantity: 12});
   }
 
   render() {
