@@ -10,8 +10,8 @@ export default class Bill extends Component {
   constructor(props) {
     super(props);
     this.state = { items: new ImmutableItems([
-      {code: 'dummy1', name: 'dummy1', mrp: 30, sp: 20, quantity: 1},
-      {code: 'dummy2', name: 'dummy2', mrp: 30, sp: 20, quantity: 1}
+      {code: 'dummy1', name: 'dummy1', sp: 20, quantity: 1},
+      {code: 'dummy2', name: 'dummy2', sp: 20, quantity: 1}
     ] )};
     this.onManuallyItemAdded = this.onManuallyItemAdded.bind(this);
     this.onBarCodeScanned = this.onBarCodeScanned.bind(this);
@@ -30,7 +30,7 @@ export default class Bill extends Component {
     if(foundItem)
       this._onUpdateItem({...foundItem, quantity: 1 + foundItem.quantity})
     else
-      this._onAddItem({name: code, mrp: 31, sp: 21, quantity: 12, code});
+      this._onAddItem({name: code, sp: 21, quantity: 12, code});
   }
 
   onManuallyItemAdded(item){

@@ -16,11 +16,10 @@ export default class ItemsTable extends Component {
         <Table className="itemsTable">
           <TableHead>
             <TableRow>
-              <TableCell colSpan={5} align="center">BILL</TableCell>
+              <TableCell colSpan={4} align="center">BILL</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Item</TableCell>
-              <TableCell align="right">MRP</TableCell>
               <TableCell align="right">SP</TableCell>
               <TableCell align="right">Quantity</TableCell>
               <TableCell align="right">Price</TableCell>
@@ -31,7 +30,6 @@ export default class ItemsTable extends Component {
               this.props.items.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row">{item.name}</TableCell>
-                  <TableCell align="right">{item.mrp}</TableCell>
                   <TableCell align="right">{item.sp}</TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
                   <TableCell align="right">{item.price}</TableCell>
