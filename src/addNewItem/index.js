@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import uuid from 'uuid/v4';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -31,7 +32,7 @@ export default class AddNewItem extends Component {
   }
 
   onAdd(event){
-    this.props.onAdd(this.state.item);
+    this.props.onAdd({...this.state.item, code: uuid()});
     this.handleClose();
     event.preventDefault();
   }

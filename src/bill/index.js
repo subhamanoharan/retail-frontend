@@ -1,9 +1,8 @@
 import React, { Component} from "react";
-import uuid from 'uuid/v4';
 
 import AddNewItem from '../addNewItem';
 import ItemsTable from '../itemsTable';
-import BarCodeInputField from '../barCodeInputField';
+import BarCodeManager from '../barCodeManager';
 import ImmutableItems from '../models/immutableItems';
 
 export default class Bill extends Component {
@@ -13,36 +12,24 @@ export default class Bill extends Component {
       {code: 'dummy1', name: 'dummy1', sp: 20, quantity: 1},
       {code: 'dummy2', name: 'dummy2', sp: 20, quantity: 1}
     ] )};
-    this.onManuallyItemAdded = this.onManuallyItemAdded.bind(this);
-    this.onBarCodeScanned = this.onBarCodeScanned.bind(this);
+    this.onAddItem = this.onAddItem.bind(this);
   }
 
-  _onAddItem(item){
-    this.setState({items: this.state.items.addItem(item)});
-  }
-
-  _onUpdateItem(itemToEdit){
-    this.setState({items: this.state.items.updateItemByCode(itemToEdit)});
-  }
-
-  onBarCodeScanned(code){
-    const foundItem = this.state.items.findItemByCode(code);
-    if(foundItem)
-      this._onUpdateItem({...foundItem, quantity: 1 + foundItem.quantity})
+  onAddItem(item){
+    const existingItem = this.state.items.findItemByCode(item.code);
+    if(existingItem)
+      this.setState({items: this.state.items.updateItemByCode(
+        {...existingItem, quantity: 1 + existingItem.quantity})});
     else
-      this._onAddItem({name: code, sp: 21, quantity: 12, code});
-  }
-
-  onManuallyItemAdded(item){
-    this._onAddItem({...item, code: uuid()});
+      this.setState({items: this.state.items.addItem(item)});
   }
 
   render() {
     return (
       <div onMouseDown={(e) => e.preventDefault() }>
-        <AddNewItem onAdd={this.onManuallyItemAdded} />
+        <AddNewItem onAdd={this.onAddItem} />
         <ItemsTable items={this.state.items.getItems()} />
-        <BarCodeInputField onScanComplete={this.onBarCodeScanned}/>
+        <BarCodeManager onItemScanned={this.onAddItem}/>
       </div>
     );
   }
