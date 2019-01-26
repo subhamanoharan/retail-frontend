@@ -9,7 +9,7 @@ export default class BarCodeManager extends Component {
   }
 
   onBarCodeScanned(code){
-      this.props.onItemScanned({name: code, sp: 21, quantity: 1, code, barCodeScanned: true});
+      this.props.onItemScanned({name: code, sp: 21, code});
   }
 
   render() {

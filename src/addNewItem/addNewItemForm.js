@@ -17,7 +17,7 @@ export default class AddNewItemForm extends Component {
   }
 
   render() {
-    const {name, mrp, sp, quantity} = this.props.item;
+    const {name, sp, quantity} = this.props.item;
     return(
       <div>
           <TextField
@@ -26,12 +26,6 @@ export default class AddNewItemForm extends Component {
             value={name}
             onChange={this.handleChange('name')}
             autoFocus
-          />
-          <TextField
-            id="mrp"
-            label="MRP"
-            value={mrp}
-            onChange={this.handleChange('mrp')}
           />
           <TextField
             id="sp"
