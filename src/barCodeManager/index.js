@@ -9,7 +9,11 @@ export default class BarCodeManager extends Component {
   }
 
   onBarCodeScanned(code){
-      this.props.onItemScanned({name: code, sp: 21, code});
+    const matchingItem = this.props.masterList.find((i) => i.code === code);
+    if(matchingItem)
+      this.props.onItemScanned(matchingItem);
+    else
+      alert('No matching item for scanned barcode');
   }
 
   render() {

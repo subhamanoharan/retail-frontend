@@ -4,6 +4,7 @@ import AddNewItem from '../addNewItem';
 import ItemsTable from '../itemsTable';
 import BarCodeManager from '../barCodeManager';
 import ImmutableCart from '../models/immutableCart';
+import masterList from './dummyMasterList.json';
 
 export default class Bill extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class Bill extends Component {
       <div onMouseDown={(e) => e.preventDefault() }>
         <AddNewItem onAdd={this.onAddItem} />
         <ItemsTable items={this.state.cart.getItems()} />
-        <BarCodeManager onItemScanned={this.onAddItem}/>
+        <BarCodeManager onItemScanned={this.onAddItem} masterList={masterList}/>
       </div>
     );
   }
