@@ -61,9 +61,8 @@ export default class AddNewItem extends Component {
               <AddNewItemForm item={this.state.item} onChange={this.onChange} />
            </DialogContent>
            <DialogActions>
-             <Button type="submit" color="primary">
-               Ok
-             </Button>
+             <Button type="submit" color="primary">Ok</Button>
+             <Button onClick={this.handleClose} color="primary">Cancel</Button>
            </DialogActions>
          </form>
        </Dialog>
