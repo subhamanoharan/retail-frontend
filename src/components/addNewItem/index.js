@@ -16,7 +16,7 @@ export default class AddNewItem extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onAdd = this.onAdd.bind(this);
-    this.state = { open: false, item: { name: ' ', sp: 0, quantity: 0 } };
+    this.state = { open: false, item: { name: '', sp: 0, quantity: 0 } };
   }
 
   handleClickOpen() {
@@ -24,7 +24,7 @@ export default class AddNewItem extends Component {
   }
 
   handleClose() {
-    this.setState({open: false, item: { name: ' ', sp: 0, quantity: 0 } });
+    this.setState({open: false, item: { name: '', sp: 0, quantity: 0 } });
   }
 
   onChange(item) {

@@ -26,11 +26,15 @@ export default class AddNewItemForm extends Component {
             value={name}
             onChange={this.handleChange('name')}
             autoFocus
+            required
           />
           <TextField
             id="sp"
             label="SP"
             value={sp}
+            required
+            type="number"
+            inputProps={{min: "1"}}
             onChange={this.handleChange('sp')}
           />
           <TextField
@@ -38,6 +42,9 @@ export default class AddNewItemForm extends Component {
             label="Quantity"
             value={quantity}
             onChange={this.handleChange('quantity')}
+            required
+            type="number"
+            inputProps={{min: "1"}}
           />
       </div>
     );
