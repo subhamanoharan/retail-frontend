@@ -5,8 +5,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import priceCalculator from './priceCalculator';
 
+import priceCalculator from './priceCalculator';
 import "./styles.css";
 
 export default class ItemsTable extends Component {

@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 
 import AddNewItemForm from './addNewItemForm';
-import "./styles.css";
+import './styles.css';
 
 export default class AddNewItem extends Component {
   constructor(props) {

@@ -1,9 +1,9 @@
-import React, { Component} from "react";
+import React, { Component} from 'react';
 
 import AddNewItem from '../addNewItem';
 import ItemsTable from '../itemsTable';
 import BarCodeManager from '../barCodeManager';
-import ImmutableCart from '../models/immutableCart';
+import ImmutableCart from '../../models/immutableCart';
 import masterList from './dummyMasterList.json';
 
 export default class Bill extends Component {
