@@ -25,7 +25,7 @@ export default class CustomDataTableSelectionToolbar extends React.Component {
     const itemToEdit = items[data[0].index];
     return (
       <div>
-        { isOneRowSelected &&
+        { isOneRowSelected && editForm &&
           <EditItemIcon
             item={itemToEdit}
             refreshItems={refreshItems}

@@ -4,12 +4,14 @@ import MUIDataTable from 'mui-datatables';
 
 import CustomSelectionToolbar from './customSelectionToolbar';
 import CustomToolbar from './customToolbar';
+import BarCodeManager from '../barCodeManager';
 
 export default class ItemsDataTable extends React.Component {
   constructor(props){
     super(props);
-    this.state = {items: [], error: ''}
+    this.state = { items: []}
     this.fetchItems = this.fetchItems.bind(this);
+    this.onAddItem = this.onAddItem.bind(this);
   }
 
   componentDidMount(){
@@ -17,9 +19,13 @@ export default class ItemsDataTable extends React.Component {
   }
 
   fetchItems(){
-    const {service} = this.props;
-    return service.list()
-      .then((items) => this.setState({items, originalItems: items}))
+    this.setState({items: this.props.service.list()})
+  }
+
+
+  onAddItem({barcode, sp, name, id}, quantity){
+    this.props.service.add({barcode, sp, name, quantity, id});
+    this.fetchItems();
   }
 
   render() {
@@ -41,11 +47,14 @@ export default class ItemsDataTable extends React.Component {
         addForm={addForm}
       />
     return (
-      <MUIDataTable
-        data={datatableService.generateData(items)}
-        columns={datatableService.getColumns()}
-        options={datatableService.generateOptions(selectionBar, addForm && toolBarToShow, rowPropsGenerator)}
-      />
+      <div onMouseDown={(e) => e.preventDefault() }>
+        <MUIDataTable
+          data={datatableService.generateData(items)}
+          columns={datatableService.getColumns()}
+          options={datatableService.generateOptions(selectionBar, addForm && toolBarToShow, rowPropsGenerator)}
+        />
+        <BarCodeManager onItemScanned={this.onAddItem} masterList={this.props.masterList}/>
+      </div>
     );
   }
 }

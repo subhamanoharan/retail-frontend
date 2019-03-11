@@ -11,17 +11,22 @@ export default class ImmutableCart {
   }
 
   updateItemByCode(item) {
-    const updatedItems = this.items.map(i => i.code === item.code ? item : i);
+    const updatedItems = this.items.map(i => i.barcode === item.barcode ? item : i);
     return new ImmutableCart(updatedItems);
   }
 
-  findItemByCode(code){
-    const matchingItem = this.items.find(i => i.code === code);
+  findItemByCode(barcode){
+    const matchingItem = this.items.find(i => i.barcode === barcode);
     return matchingItem ? {...matchingItem} : matchingItem;
   }
 
+  deleteItem(item) {
+    const updatedItems = this.items.filter(i => i.barcode !== item.barcode);
+    return new ImmutableCart(updatedItems);
+  }
+
   addItem(item, quantity = 1) {
-    const existingItem = this.findItemByCode(item.code);
+    const existingItem = this.findItemByCode(item.barcode);
     if(existingItem)
       return this._incrementItemQuantity(existingItem, quantity);
     else

@@ -1,7 +1,7 @@
 export default class CartItem {
-  constructor({name, code, quantity = 1, sp}){
+  constructor({name, barcode, quantity = 1, sp}){
     this.name = name;
-    this.code = code;
+    this.barcode = barcode;
     this.quantity = quantity;
     this.sp = sp;
   }

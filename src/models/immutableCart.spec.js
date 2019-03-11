@@ -2,8 +2,8 @@ import deepFreeze from 'deep-freeze';
 import ImmutableCart from './immutableCart';
 
 describe('ImmutableCart', () => {
-  const item1 = {name: 'a1', quantity: 15, code: '123', sp: 1};
-  const item2 = {name: 'a2', quantity: 5, code: '124', sp: 2};
+  const item1 = {name: 'a1', quantity: 15, barcode: '123', sp: 1};
+  const item2 = {name: 'a2', quantity: 5, barcode: '124', sp: 2};
   const initialItems = [item1, item2];
 
   //This is to check that the array is not mutated by any further operation
@@ -34,7 +34,7 @@ describe('ImmutableCart', () => {
     });
 
     it('should ignore if it does not exist', () => {
-      const updatedItems = immutableCart.updateItemByCode({code: 'blah'});
+      const updatedItems = immutableCart.updateItemByCode({barcode: 'blah'});
       const items = updatedItems.items;
 
       expect(items).toHaveLength(2)
@@ -44,9 +44,24 @@ describe('ImmutableCart', () => {
     });
   });
 
+  describe('deleteItem', () =>{
+    it('should delete item', () => {
+      const item3 = {name: 'a3', barcode: '125', sp: 5};
+      const expectedItem3 = {...item3, quantity: 12};
+
+      const cartAfterAdding = immutableCart.addItem(item3, 12);
+      const cartAfterDeleting = immutableCart.deleteItem(item3);
+      const items = cartAfterDeleting.getItems();
+
+      expect(items).toHaveLength(2)
+      const [i1, i2] = items;
+      expect(i1).toEqual(item1);
+      expect(i2).toEqual(item2);
+    });
+  });
   describe('addItem', () =>{
     it('should add a new item', () => {
-      const item3 = {name: 'a3', code: '125', sp: 5};
+      const item3 = {name: 'a3', barcode: '125', sp: 5};
       const expectedItem3 = {...item3, quantity: 12};
 
       const cartAfterAdding = immutableCart.addItem(item3, 12);
@@ -60,7 +75,7 @@ describe('ImmutableCart', () => {
     });
 
     it('should update quantity of existing item by 1 by default', () => {
-      const cartAfterAdding = immutableCart.addItem({code: item2.code});
+      const cartAfterAdding = immutableCart.addItem({barcode: item2.barcode});
       const items = cartAfterAdding.getItems();
 
       expect(items).toHaveLength(2)
@@ -70,7 +85,7 @@ describe('ImmutableCart', () => {
     });
 
     it('should update quantity of existing item by given quantity', () => {
-      const cartAfterAdding = immutableCart.addItem({code: item2.code}, 3);
+      const cartAfterAdding = immutableCart.addItem({barcode: item2.barcode}, 3);
       const items = cartAfterAdding.getItems();
 
       expect(items).toHaveLength(2)
