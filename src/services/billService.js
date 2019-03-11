@@ -8,7 +8,6 @@ export default class BillService {
   }
 
   add({barcode, sp, name, quantity, id}){
-    console.log('adding')
     this.cart =  this.cart.addItem({barcode, sp, name, id}, quantity)
     return Promise.resolve();
   }
