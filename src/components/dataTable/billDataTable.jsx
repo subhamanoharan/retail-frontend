@@ -22,7 +22,6 @@ export default class ItemsDataTable extends React.Component {
     this.setState({items: this.props.service.list()})
   }
 
-
   onAddItem({barcode, sp, name, id}, quantity){
     this.props.service.add({barcode, sp, name, quantity, id});
     this.fetchItems();
@@ -48,12 +47,12 @@ export default class ItemsDataTable extends React.Component {
       />
     return (
       <div onMouseDown={(e) => e.preventDefault() }>
+        <BarCodeManager onItemScanned={this.onAddItem} masterList={this.props.masterList}/>
         <MUIDataTable
           data={datatableService.generateData(items)}
           columns={datatableService.getColumns()}
           options={datatableService.generateOptions(selectionBar, addForm && toolBarToShow, rowPropsGenerator)}
         />
-        <BarCodeManager onItemScanned={this.onAddItem} masterList={this.props.masterList}/>
       </div>
     );
   }

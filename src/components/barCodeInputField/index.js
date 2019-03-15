@@ -1,6 +1,10 @@
 import React, { Component} from 'react';
 
-import './styles.css';
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 export default class BarCodeInputField extends Component {
   constructor(props) {
@@ -11,8 +15,8 @@ export default class BarCodeInputField extends Component {
   }
 
   onScanComplete(event){
-    this.props.onScanComplete(this.state.code);
     event.preventDefault();
+    this.props.onScanComplete(this.state.code);
     this.setState({code: ''});
   }
 
@@ -20,17 +24,28 @@ export default class BarCodeInputField extends Component {
     this.setState({code: event.target.value});
   }
 
-  isWaitingForScan(){
-    return document.activeElement.id === "barCodeInput";
-  }
-
   render() {
     return (
-      <form noValidate autoComplete="off" onSubmit={this.onScanComplete}>
-        {this.isWaitingForScan() && <p> Waiting for scan </p>}
-        <input type="text" id="barCodeInput" className="barCodeInput" onChange={this.onScanInput} autoFocus value={this.state.code}/>
-        <button type="submit" className="barCodeSubmit"/>
-      </form>
+      <Card>
+        <CardContent>
+          <form noValidate autoComplete="off" onSubmit={this.onScanComplete}>
+            <Grid container spacing={16}>
+              <Grid item xs={11}>
+                <TextField
+                  id="barCodeInput"
+                  value={this.state.code}
+                  onChange={this.onScanInput}
+                  autoFocus
+                  fullWidth
+                />
+              </Grid>
+              <Grid item>
+                <Button type="submit" color="primary" size="small" variant="contained">Scan</Button>
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
     );
   }
 }
